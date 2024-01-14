@@ -2,4 +2,5 @@
 ==================
 
 ### Features
+
 - `fix-manifest-resources`: initial release of a new hook to fix k8s resources.

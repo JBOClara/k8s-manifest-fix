@@ -1,8 +1,8 @@
--   id: fix-manifest-resources
-    name: fix manifest resources
-    description: ensures that kubernetes manifests are up to date with VPA recommendations.
-    entry: fix-manifest-resources
-    language: python
-    types: [yaml]
-    files: '**/@(deployments|statefulsets)/*.yaml'
-    stages: [commit, push, manual]
+- id: fix-manifest-resources
+  name: fix manifest resources
+  description: ensures that kubernetes manifests are up to date with VPA recommendations.
+  entry: fix-manifest-resources
+  language: python
+  types: [ yaml ]
+  files: '**/@(deployments|statefulsets)/*.yaml'
+  stages: [ commit, push, manual ]

@@ -4,7 +4,6 @@
 k8s-manifest-fix
 ================
 
-
 ### Using k8s-manifest-fix with pre-commit
 
 Add this to your `.pre-commit-config.yaml`
@@ -20,4 +19,5 @@ Add this to your `.pre-commit-config.yaml`
 ### Hooks available
 
 #### `k8s-manifest-fix`
+
 Check if kubernetes resources are matching a prometheus exposing VPA recommendations.

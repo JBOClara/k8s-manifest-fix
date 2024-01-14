@@ -35,6 +35,7 @@ yaml.representer.add_representer(
     type(None), lambda self, _: self.represent_scalar('tag:yaml.org,2002:null', 'null'),
 )
 
+
 # get kubernetes manifest identity
 
 
@@ -72,6 +73,7 @@ def get_manifest_identity(filename: str) -> dict[str, str | list[str]]:
             'containers_name': containers_name,
             'file_path': filename,
         }
+
 
 # # Récupérer les métriques de Prometheus
 # # time=<rfc3339 | unix_timestamp>: Evaluation timestamp. Optional.
@@ -150,9 +152,7 @@ def adjust_resources(filename: str) -> int:
                             if unit == 'byte':
                                 new_unit = 'Mi'
                                 new_value = round(int(value) / 1024 / 1024)
-                        if (
-                            resource_type in container['resources']['requests'] and container['resources']['requests'][resource_type] == str(new_value) + new_unit
-                        ):
+                        if resource_type in container['resources']['requests'] and container['resources']['requests'][resource_type] == str(new_value) + new_unit:
                             continue
                         if resource_type in container['resources']['requests']:
                             old_value = container['resources']['requests'][resource_type]
@@ -175,8 +175,10 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument('filenames', nargs='*', help='Filenames to fix')
     parser.add_argument('--prometheus_url', help='URL of Prometheus')
-    # add an placeholder into the prometheus_url
-    parser.add_argument('--env_placeholder', help='prometheus placeholder of the manifest that will be replaced by the env')
+    parser.add_argument(
+        '--env_placeholder',
+        help='prometheus placeholder of the manifest that will be replaced by the env',
+    )
     args = parser.parse_args(argv)
 
     # Log all environment variables
